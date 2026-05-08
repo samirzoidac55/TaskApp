@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="gcm_defaultSenderId" translatable="false">625453930240</string>
+    <string name="google_api_key" translatable="false">AIzaSyCKJ4fTUyswIJxfmT29Yhj7dIkLOZNEe6U</string>
+    <string name="google_app_id" translatable="false">1:625453930240:android:6723278c4817cad48b45e5</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyCKJ4fTUyswIJxfmT29Yhj7dIkLOZNEe6U</string>
+    <string name="google_storage_bucket" translatable="false">taskguard-c0c4f.firebasestorage.app</string>
+    <string name="project_id" translatable="false">taskguard-c0c4f</string>
+</resources>
