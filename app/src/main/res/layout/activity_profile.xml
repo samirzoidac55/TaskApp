@@ -8,6 +8,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
         android:orientation="vertical"
         android:padding="24dp">
 
@@ -19,11 +20,10 @@
             android:padding="18dp">
 
             <TextView
-                android:id="@+id/createTaskTitleTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="monospace"
-                android:text="Create Task"
+                android:text="Profile"
                 android:textColor="@color/colorText"
                 android:textSize="25sp"
                 android:textStyle="bold" />
@@ -32,83 +32,73 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="Assign clear work to a team member"
+                android:text="Identity and access profile"
                 android:textColor="@color/colorSubText"
                 android:textSize="14sp" />
-
         </LinearLayout>
+
+        <com.taskguard.views.CircleImageView
+            android:id="@+id/profileImageView"
+            android:layout_width="116dp"
+            android:layout_height="116dp"
+            android:layout_marginTop="24dp"
+            android:contentDescription="Profile picture" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:layout_marginBottom="8dp"
-            android:text="Title"
+            android:text="User name"
             android:textColor="@color/colorText"
             android:textSize="14sp"
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/titleEditText"
+            android:id="@+id/profileNameEditText"
             android:layout_width="match_parent"
             android:layout_height="52dp"
             android:background="@drawable/bg_input"
-            android:hint="Enter task title"
-            android:inputType="textCapSentences"
+            android:hint="Name"
+            android:inputType="textPersonName"
             android:textColor="@color/colorText"
             android:textColorHint="@color/colorSubText"
             android:textSize="15sp" />
 
         <TextView
+            android:id="@+id/profileEmailTextView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp"
-            android:text="Description"
-            android:textColor="@color/colorText"
-            android:textSize="14sp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/descriptionEditText"
-            android:layout_width="match_parent"
-            android:layout_height="128dp"
-            android:background="@drawable/bg_input"
-            android:gravity="top"
-            android:hint="Describe the task"
-            android:inputType="textMultiLine|textCapSentences"
-            android:textColor="@color/colorText"
-            android:textColorHint="@color/colorSubText"
+            android:layout_height="52dp"
+            android:layout_marginTop="14dp"
+            android:background="@drawable/bg_card"
+            android:gravity="center_vertical"
+            android:paddingStart="14dp"
+            android:paddingEnd="14dp"
+            android:textColor="@color/colorSubText"
             android:textSize="15sp" />
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp"
-            android:text="Assigned to"
+            android:id="@+id/profileRoleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_gravity="start"
+            android:layout_marginTop="14dp"
+            android:background="@drawable/bg_secondary_button"
+            android:gravity="center"
+            android:minWidth="96dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
             android:textColor="@color/colorText"
             android:textSize="14sp"
             android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/assignedToEditText"
-            android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:background="@drawable/bg_input"
-            android:hint="member@example.com"
-            android:inputType="textEmailAddress"
-            android:textColor="@color/colorText"
-            android:textColorHint="@color/colorSubText"
-            android:textSize="15sp" />
 
         <Button
-            android:id="@+id/saveTaskButton"
+            android:id="@+id/saveProfileButton"
             android:layout_width="match_parent"
             android:layout_height="52dp"
             android:layout_marginTop="24dp"
             android:background="@drawable/bg_primary_button"
-            android:text="Save Task"
+            android:text="Save"
             android:textAllCaps="false"
             android:textColor="@color/colorButtonText"
             android:textSize="16sp"
@@ -118,9 +108,7 @@
             android:id="@+id/progressBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
             android:layout_marginTop="18dp"
             android:visibility="gone" />
-
     </LinearLayout>
 </ScrollView>

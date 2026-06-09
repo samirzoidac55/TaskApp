@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.taskguard.views.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drawerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground">
+
+    <FrameLayout
+        android:id="@+id/drawerContentFrame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorBackground" />
+
+    <com.taskguard.views.NavigationView
+        android:id="@+id/drawerNavigationView"
+        android:layout_width="288dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@color/colorBackground"
+        android:orientation="vertical">
+
+        <include layout="@layout/nav_header" />
+
+        <TextView
+            android:id="@id/nav_profile"
+            style="@style/DrawerMenuItem"
+            android:text="Profile" />
+
+        <TextView
+            android:id="@id/nav_tasks"
+            style="@style/DrawerMenuItem"
+            android:text="My Tasks" />
+
+        <TextView
+            android:id="@id/nav_contact"
+            style="@style/DrawerMenuItem"
+            android:text="Contact Admin" />
+
+        <TextView
+            android:id="@id/nav_delete_users"
+            style="@style/DrawerMenuItem"
+            android:text="Delete Users" />
+
+        <TextView
+            android:id="@id/nav_logout"
+            style="@style/DrawerMenuItem"
+            android:text="Logout" />
+
+    </com.taskguard.views.NavigationView>
+
+</com.taskguard.views.DrawerLayout>

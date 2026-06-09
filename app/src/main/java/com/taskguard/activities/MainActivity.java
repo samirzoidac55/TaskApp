@@ -7,7 +7,10 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.taskguard.R;
+import com.taskguard.utils.DrawerController;
 import com.taskguard.utils.RoleManager;
+import com.taskguard.utils.SessionManager;
 
 public class MainActivity extends Activity {
 
@@ -17,6 +20,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
         firebaseAuth = FirebaseAuth.getInstance();
         roleManager = new RoleManager();
@@ -28,6 +32,14 @@ public class MainActivity extends Activity {
             return;
         }
 
+        if (SessionManager.isSessionExpired(this)) {
+            SessionManager.clearSession(this);
+            firebaseAuth.signOut();
+            Toast.makeText(this, "Session expired. Please log in again", Toast.LENGTH_LONG).show();
+            openLoginActivity();
+            return;
+        }
+
         fetchRoleAndRedirect();
     }
 
@@ -35,6 +47,7 @@ public class MainActivity extends Activity {
         roleManager.getCurrentUserRole(new RoleManager.RoleCallback() {
             @Override
             public void onRoleLoaded(String role) {
+                DrawerController.setup(MainActivity.this, role);
                 if (roleManager.isAdmin(role)) {
                     openRoleActivity(AdminActivity.class);
                 } else if (roleManager.isManager(role)) {

@@ -21,6 +21,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.taskguard.R;
 import com.taskguard.models.Task;
+import com.taskguard.utils.DrawerController;
+import com.taskguard.utils.RoleManager;
+import com.taskguard.utils.SessionManager;
+import com.taskguard.utils.ZeroTrustManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +48,6 @@ public class MemberActivity extends Activity {
 
         progressBar = findViewById(R.id.progressBar);
         emptyTextView = findViewById(R.id.emptyTextView);
-        Button logoutButton = findViewById(R.id.logoutButton);
 
         RecyclerView assignedTasksRecyclerView = findViewById(R.id.assignedTasksRecyclerView);
         assignedTasksRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -52,12 +55,14 @@ public class MemberActivity extends Activity {
         taskAdapter = new TaskAdapter(tasks);
         assignedTasksRecyclerView.setAdapter(taskAdapter);
 
-        logoutButton.setOnClickListener(v -> logout());
+        DrawerController.setup(this, RoleManager.ROLE_MEMBER);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        ZeroTrustManager.verifyAccess("Member", this);
+        DrawerController.loadHeader(this);
         fetchAssignedTasks();
     }
 
@@ -107,6 +112,7 @@ public class MemberActivity extends Activity {
     }
 
     private void logout() {
+        SessionManager.clearSession(this);
         FirebaseAuth.getInstance().signOut();
         Intent intent = new Intent(this, LoginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

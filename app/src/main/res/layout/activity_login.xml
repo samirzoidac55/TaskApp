@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/screen_background"
+    android:background="@color/colorBackground"
     android:fillViewport="true">
 
     <LinearLayout
@@ -20,7 +20,7 @@
             android:background="@drawable/bg_logo_circle"
             android:gravity="center"
             android:text="TG"
-            android:textColor="@android:color/white"
+            android:textColor="@color/colorText"
             android:textSize="30sp"
             android:textStyle="bold" />
 
@@ -29,9 +29,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="18dp"
+            android:fontFamily="monospace"
             android:gravity="center"
-            android:text="TaskGuard"
-            android:textColor="@color/text_primary"
+            android:text="TASKGUARD"
+            android:textColor="@color/colorText"
             android:textSize="30sp"
             android:textStyle="bold" />
 
@@ -42,7 +43,7 @@
             android:layout_marginBottom="28dp"
             android:gravity="center"
             android:text="Secure task tracking for every role"
-            android:textColor="@color/text_secondary"
+            android:textColor="@color/colorSubText"
             android:textSize="15sp" />
 
         <EditText
@@ -52,8 +53,8 @@
             android:background="@drawable/bg_input"
             android:hint="Email"
             android:inputType="textEmailAddress"
-            android:textColor="@color/text_primary"
-            android:textColorHint="@color/text_secondary"
+            android:textColor="@color/colorText"
+            android:textColorHint="@color/colorSubText"
             android:textSize="15sp" />
 
         <EditText
@@ -64,8 +65,8 @@
             android:background="@drawable/bg_input"
             android:hint="Password"
             android:inputType="textPassword"
-            android:textColor="@color/text_primary"
-            android:textColorHint="@color/text_secondary"
+            android:textColor="@color/colorText"
+            android:textColorHint="@color/colorSubText"
             android:textSize="15sp" />
 
         <Button
@@ -76,7 +77,7 @@
             android:background="@drawable/bg_primary_button"
             android:text="Login"
             android:textAllCaps="false"
-            android:textColor="@android:color/white"
+            android:textColor="@color/colorButtonText"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -88,7 +89,7 @@
             android:background="@drawable/bg_secondary_button"
             android:text="Create account"
             android:textAllCaps="false"
-            android:textColor="@color/primary_blue"
+            android:textColor="@color/colorText"
             android:textSize="16sp"
             android:textStyle="bold" />
 

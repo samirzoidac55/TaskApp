@@ -19,11 +19,10 @@
             android:padding="18dp">
 
             <TextView
-                android:id="@+id/createTaskTitleTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="monospace"
-                android:text="Create Task"
+                android:text="Contact Admin"
                 android:textColor="@color/colorText"
                 android:textSize="25sp"
                 android:textStyle="bold" />
@@ -32,83 +31,31 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="Assign clear work to a team member"
+                android:text="Send a secure access request"
                 android:textColor="@color/colorSubText"
                 android:textSize="14sp" />
-
         </LinearLayout>
 
-        <TextView
+        <EditText
+            android:id="@+id/messageEditText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="160dp"
             android:layout_marginTop="24dp"
-            android:layout_marginBottom="8dp"
-            android:text="Title"
-            android:textColor="@color/colorText"
-            android:textSize="14sp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/titleEditText"
-            android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:background="@drawable/bg_input"
-            android:hint="Enter task title"
-            android:inputType="textCapSentences"
-            android:textColor="@color/colorText"
-            android:textColorHint="@color/colorSubText"
-            android:textSize="15sp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp"
-            android:text="Description"
-            android:textColor="@color/colorText"
-            android:textSize="14sp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/descriptionEditText"
-            android:layout_width="match_parent"
-            android:layout_height="128dp"
             android:background="@drawable/bg_input"
             android:gravity="top"
-            android:hint="Describe the task"
+            android:hint="Message"
             android:inputType="textMultiLine|textCapSentences"
             android:textColor="@color/colorText"
             android:textColorHint="@color/colorSubText"
             android:textSize="15sp" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp"
-            android:text="Assigned to"
-            android:textColor="@color/colorText"
-            android:textSize="14sp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/assignedToEditText"
-            android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:background="@drawable/bg_input"
-            android:hint="member@example.com"
-            android:inputType="textEmailAddress"
-            android:textColor="@color/colorText"
-            android:textColorHint="@color/colorSubText"
-            android:textSize="15sp" />
-
         <Button
-            android:id="@+id/saveTaskButton"
+            android:id="@+id/sendMessageButton"
             android:layout_width="match_parent"
             android:layout_height="52dp"
             android:layout_marginTop="24dp"
             android:background="@drawable/bg_primary_button"
-            android:text="Save Task"
+            android:text="Send"
             android:textAllCaps="false"
             android:textColor="@color/colorButtonText"
             android:textSize="16sp"
@@ -121,6 +68,5 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="18dp"
             android:visibility="gone" />
-
     </LinearLayout>
 </ScrollView>

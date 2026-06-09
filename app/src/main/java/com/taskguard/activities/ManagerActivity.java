@@ -20,6 +20,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.taskguard.R;
 import com.taskguard.models.Task;
+import com.taskguard.utils.DrawerController;
+import com.taskguard.utils.RoleManager;
+import com.taskguard.utils.SessionManager;
+import com.taskguard.utils.ZeroTrustManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +43,6 @@ public class ManagerActivity extends Activity {
 
         firestore = FirebaseFirestore.getInstance();
 
-        Button logoutButton = findViewById(R.id.logoutButton);
         View fabCreateTask = findViewById(R.id.fabCreateTask);
         progressBar = findViewById(R.id.progressBar);
         emptyTextView = findViewById(R.id.emptyTextView);
@@ -53,12 +56,14 @@ public class ManagerActivity extends Activity {
         fabCreateTask.setOnClickListener(v ->
                 startActivity(new Intent(ManagerActivity.this, CreateTaskActivity.class)));
 
-        logoutButton.setOnClickListener(v -> logout());
+        DrawerController.setup(this, RoleManager.ROLE_MANAGER);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        ZeroTrustManager.verifyAccess("Manager", this);
+        DrawerController.loadHeader(this);
         fetchTasks();
     }
 
@@ -91,6 +96,7 @@ public class ManagerActivity extends Activity {
     }
 
     private void logout() {
+        SessionManager.clearSession(this);
         FirebaseAuth.getInstance().signOut();
         Intent intent = new Intent(this, LoginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

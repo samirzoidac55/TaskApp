@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/navHeader"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorBackground"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <com.taskguard.views.CircleImageView
+        android:id="@+id/drawerProfileImageView"
+        android:layout_width="76dp"
+        android:layout_height="76dp"
+        android:contentDescription="Profile picture" />
+
+    <TextView
+        android:id="@+id/drawerUserNameTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:fontFamily="monospace"
+        android:text="TaskGuard User"
+        android:textColor="@color/colorText"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/drawerUserRoleTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="monospace"
+        android:text="Role"
+        android:textColor="@color/colorSubText"
+        android:textSize="14sp" />
+
+</LinearLayout>

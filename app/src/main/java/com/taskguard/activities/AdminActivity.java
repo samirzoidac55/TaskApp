@@ -1,6 +1,7 @@
 package com.taskguard.activities;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -19,7 +20,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.taskguard.R;
+import com.taskguard.utils.DrawerController;
 import com.taskguard.utils.RoleManager;
+import com.taskguard.utils.SessionManager;
+import com.taskguard.utils.ZeroTrustManager;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -54,16 +58,22 @@ public class AdminActivity extends Activity {
 
         progressBar = findViewById(R.id.progressBar);
         emptyTextView = findViewById(R.id.emptyTextView);
-        Button logoutButton = findViewById(R.id.logoutButton);
 
         RecyclerView usersRecyclerView = findViewById(R.id.usersRecyclerView);
         usersRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        userAdapter = new UserAdapter(users, this::changeUserRole);
+        userAdapter = new UserAdapter(users, this::changeUserRole, this::confirmDeleteUser);
         usersRecyclerView.setAdapter(userAdapter);
 
-        logoutButton.setOnClickListener(v -> logout());
+        DrawerController.setup(this, RoleManager.ROLE_ADMIN);
         checkAdminAccess();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ZeroTrustManager.verifyAccess("Admin", this);
+        DrawerController.loadHeader(this);
     }
 
     private void checkAdminAccess() {
@@ -152,6 +162,33 @@ public class AdminActivity extends Activity {
                 });
     }
 
+    private void confirmDeleteUser(AppUser user) {
+        new AlertDialog.Builder(this)
+                .setTitle("Delete user")
+                .setMessage("Delete " + valueOrFallback(user.getEmail(), "this user") + " from TaskGuard?")
+                .setPositiveButton("Delete", (dialog, which) -> deleteUser(user))
+                .setNegativeButton("Cancel", null)
+                .show();
+    }
+
+    private void deleteUser(AppUser user) {
+        setLoading(true);
+        firestore.collection(USERS_COLLECTION)
+                .document(user.getId())
+                .delete()
+                .addOnSuccessListener(unused -> {
+                    users.remove(user);
+                    userAdapter.notifyDataSetChanged();
+                    emptyTextView.setVisibility(users.isEmpty() ? View.VISIBLE : View.GONE);
+                    setLoading(false);
+                    Toast.makeText(AdminActivity.this, "User deleted", Toast.LENGTH_SHORT).show();
+                })
+                .addOnFailureListener(e -> {
+                    setLoading(false);
+                    Toast.makeText(AdminActivity.this, "Failed to delete user", Toast.LENGTH_LONG).show();
+                });
+    }
+
     private String getNextRole(String currentRole) {
         String normalizedRole = normalizeRole(currentRole);
         int currentIndex = ROLES.indexOf(normalizedRole);
@@ -159,7 +196,12 @@ public class AdminActivity extends Activity {
         return ROLES.get(nextIndex);
     }
 
+    private String valueOrFallback(String value, String fallback) {
+        return value == null || value.isEmpty() ? fallback : value;
+    }
+
     private void logout() {
+        SessionManager.clearSession(this);
         FirebaseAuth.getInstance().signOut();
         Intent intent = new Intent(this, LoginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -171,14 +213,22 @@ public class AdminActivity extends Activity {
         void onRoleChangeClicked(AppUser user);
     }
 
+    private interface OnDeleteUserClickListener {
+        void onDeleteUserClicked(AppUser user);
+    }
+
     private static class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder> {
 
         private final List<AppUser> users;
         private final OnRoleChangeClickListener roleChangeClickListener;
+        private final OnDeleteUserClickListener deleteUserClickListener;
 
-        UserAdapter(List<AppUser> users, OnRoleChangeClickListener roleChangeClickListener) {
+        UserAdapter(List<AppUser> users,
+                    OnRoleChangeClickListener roleChangeClickListener,
+                    OnDeleteUserClickListener deleteUserClickListener) {
             this.users = users;
             this.roleChangeClickListener = roleChangeClickListener;
+            this.deleteUserClickListener = deleteUserClickListener;
         }
 
         @NonNull
@@ -191,7 +241,7 @@ public class AdminActivity extends Activity {
 
         @Override
         public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
-            holder.bind(users.get(position), roleChangeClickListener);
+            holder.bind(users.get(position), roleChangeClickListener, deleteUserClickListener);
         }
 
         @Override
@@ -205,6 +255,7 @@ public class AdminActivity extends Activity {
             private final TextView emailTextView;
             private final TextView roleTextView;
             private final Button changeRoleButton;
+            private final Button deleteUserButton;
 
             UserViewHolder(@NonNull View itemView) {
                 super(itemView);
@@ -212,14 +263,18 @@ public class AdminActivity extends Activity {
                 emailTextView = itemView.findViewById(R.id.userEmailTextView);
                 roleTextView = itemView.findViewById(R.id.userRoleTextView);
                 changeRoleButton = itemView.findViewById(R.id.changeRoleButton);
+                deleteUserButton = itemView.findViewById(R.id.deleteUserButton);
             }
 
-            void bind(AppUser user, OnRoleChangeClickListener roleChangeClickListener) {
+            void bind(AppUser user,
+                      OnRoleChangeClickListener roleChangeClickListener,
+                      OnDeleteUserClickListener deleteUserClickListener) {
                 nameTextView.setText(valueOrFallback(user.getName(), "No name"));
                 emailTextView.setText("Email: " + valueOrFallback(user.getEmail(), "No email"));
                 roleTextView.setText("Role: " + valueOrFallback(user.getRole(), RoleManager.ROLE_MEMBER));
                 changeRoleButton.setText("Change to " + getNextRoleLabel(user.getRole()));
                 changeRoleButton.setOnClickListener(v -> roleChangeClickListener.onRoleChangeClicked(user));
+                deleteUserButton.setOnClickListener(v -> deleteUserClickListener.onDeleteUserClicked(user));
             }
 
             private String getNextRoleLabel(String role) {

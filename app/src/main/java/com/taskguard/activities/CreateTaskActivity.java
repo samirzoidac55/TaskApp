@@ -14,6 +14,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.taskguard.R;
 import com.taskguard.utils.RoleManager;
+import com.taskguard.utils.ZeroTrustManager;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -49,6 +50,12 @@ public class CreateTaskActivity extends Activity {
         saveTaskButton.setOnClickListener(v -> createTask());
 
         checkManagerAccess();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ZeroTrustManager.verifyAccess("Manager", this);
     }
 
     private void checkManagerAccess() {

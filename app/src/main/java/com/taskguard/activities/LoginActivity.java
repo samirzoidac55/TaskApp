@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.taskguard.R;
+import com.taskguard.utils.SessionManager;
 
 public class LoginActivity extends Activity {
 
@@ -62,6 +63,7 @@ public class LoginActivity extends Activity {
                     setLoading(false);
 
                     if (task.isSuccessful()) {
+                        SessionManager.refreshSession(LoginActivity.this);
                         Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);

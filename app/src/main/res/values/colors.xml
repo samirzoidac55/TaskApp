@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primary_blue">#1565C0</color>
-    <color name="primary_blue_dark">#0D47A1</color>
-    <color name="primary_blue_light">#E3F2FD</color>
-    <color name="accent_blue">#42A5F5</color>
-    <color name="screen_background">#F4F8FC</color>
-    <color name="surface">#FFFFFF</color>
-    <color name="text_primary">#172033</color>
-    <color name="text_secondary">#607086</color>
-    <color name="border_light">#D8E2EE</color>
-    <color name="danger">#D32F2F</color>
+    <color name="colorPrimary">#00FF41</color>
+    <color name="colorBackground">#0D0D0D</color>
+    <color name="colorSurface">#1A1A1A</color>
+    <color name="colorText">#00FF41</color>
+    <color name="colorSubText">#007A1F</color>
+    <color name="colorButton">#00FF41</color>
+    <color name="colorButtonText">#000000</color>
 </resources>

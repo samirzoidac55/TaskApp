@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/screen_background"
+    android:background="@color/colorBackground"
     android:fillViewport="true">
 
     <LinearLayout
@@ -17,9 +17,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="36dp"
+            android:fontFamily="monospace"
             android:gravity="center"
             android:text="Create Account"
-            android:textColor="@color/text_primary"
+            android:textColor="@color/colorText"
             android:textSize="28sp"
             android:textStyle="bold" />
 
@@ -27,11 +28,32 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
-            android:layout_marginBottom="28dp"
+            android:layout_marginBottom="20dp"
             android:gravity="center"
             android:text="Join TaskGuard and start managing tasks"
-            android:textColor="@color/text_secondary"
+            android:textColor="@color/colorSubText"
             android:textSize="15sp" />
+
+        <com.taskguard.views.CircleImageView
+            android:id="@+id/registerProfileImageView"
+            android:layout_width="104dp"
+            android:layout_height="104dp"
+            android:contentDescription="Optional profile picture" />
+
+        <TextView
+            android:id="@+id/selectProfileImageTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="42dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="18dp"
+            android:background="@drawable/bg_secondary_button"
+            android:gravity="center"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:text="Add profile image"
+            android:textColor="@color/colorText"
+            android:textSize="14sp"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/nameEditText"
@@ -40,8 +62,8 @@
             android:background="@drawable/bg_input"
             android:hint="Name"
             android:inputType="textPersonName"
-            android:textColor="@color/text_primary"
-            android:textColorHint="@color/text_secondary"
+            android:textColor="@color/colorText"
+            android:textColorHint="@color/colorSubText"
             android:textSize="15sp" />
 
         <EditText
@@ -52,8 +74,8 @@
             android:background="@drawable/bg_input"
             android:hint="Email"
             android:inputType="textEmailAddress"
-            android:textColor="@color/text_primary"
-            android:textColorHint="@color/text_secondary"
+            android:textColor="@color/colorText"
+            android:textColorHint="@color/colorSubText"
             android:textSize="15sp" />
 
         <EditText
@@ -64,8 +86,8 @@
             android:background="@drawable/bg_input"
             android:hint="Password"
             android:inputType="textPassword"
-            android:textColor="@color/text_primary"
-            android:textColorHint="@color/text_secondary"
+            android:textColor="@color/colorText"
+            android:textColorHint="@color/colorSubText"
             android:textSize="15sp" />
 
         <Button
@@ -76,7 +98,7 @@
             android:background="@drawable/bg_primary_button"
             android:text="Register"
             android:textAllCaps="false"
-            android:textColor="@android:color/white"
+            android:textColor="@color/colorButtonText"
             android:textSize="16sp"
             android:textStyle="bold" />
 
