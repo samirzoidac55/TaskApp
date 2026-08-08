@@ -146,6 +146,6 @@ app/build/outputs/apk/debug/app-debug.apk
 ## Notes
 
 - New registered users receive the `Member` role by default.
-- `ZeroTrustManager` verifies session state and role access before protected screens are used.
+
 - `SessionManager` expires local sessions after 30 minutes.
 - Task assignment currently uses the member email address in the `assignedTo` field.
